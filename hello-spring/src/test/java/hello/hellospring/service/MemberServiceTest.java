@@ -5,6 +5,7 @@ import hello.hellospring.repository.MemberRepository;
 import hello.hellospring.repository.MemoryMemberRepository;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Optional;
@@ -12,11 +13,19 @@ import java.util.Optional;
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 
+//ctrl + R 이전 실행 그대로 실행해줌
+
 class MemberServiceTest {
-    MemberService memberService = new MemberService();
+    MemberService memberService; //여기를 비포이치로 인해서 변경
     // clear를 해주고 싶은데 memberservice바껭없잖아
     //memberrepository 가져와야됨
-    MemoryMemberRepository memberRepository = new MemoryMemberRepository();
+    MemoryMemberRepository memberRepository; //여기 넣어놓고
+
+    @BeforeEach //동작하기 전에 넣어줌
+    public void beforeEach() { //각 테스트 전에
+        memberRepository = new MemoryMemberRepository(); //메모리멤버리포지토리 만들어주고
+        memberService = new MemberService(memberRepository); //멤버 서비스에서 넣어준다
+    }
 
     @AfterEach
     public void afterEach(){

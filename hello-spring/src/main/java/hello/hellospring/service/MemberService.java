@@ -9,7 +9,12 @@ import java.util.Optional;
 
 public class MemberService {
 
-    private final MemberRepository memberRepository = new MemoryMemberRepository();
+    private final MemberRepository memberRepository;
+
+    //걍 외부에서 넣어줘
+    public MemberService(MemberRepository memberRepository) { //new하는게 아니라 외부에서 넣어주죠? 이걸 dependency injection 이라고 함
+        this.memberRepository = memberRepository; //직접 내가 new해서 생성하는게 아니라 외부에서 넣어주도록 바꿔준다.
+    }
 
     /**
      * 회원 가입
