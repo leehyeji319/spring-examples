@@ -1,9 +1,6 @@
 # spring-examples
 
 ## inflearn spring 강의
-김영한님 강의 
-
-백기선님 강의
 
 </br>
 
