@@ -3,15 +3,20 @@ package hello.hellospring.service;
 import hello.hellospring.domain.Member;
 import hello.hellospring.repository.MemberRepository;
 import hello.hellospring.repository.MemoryMemberRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
-public class MemberService {
+@Service //service네 하고 스프링이 스프링 컨테이너에 딱 등록해준다.
+public class MemberService { //얘는 순수한 자바 코드
 
     private final MemberRepository memberRepository;
 
     //걍 외부에서 넣어줘
+    @Autowired // autowired 가 잇으면 아 너는 멤머 리포지토리가 필요하구나 해서
+    // 스프링 컨테이너에 있는 멤버 리포지토리를 뙇 넣어줌 memorymemberrepository 넣어줌 ㅋ
     public MemberService(MemberRepository memberRepository) { //new하는게 아니라 외부에서 넣어주죠? 이걸 dependency injection 이라고 함
         this.memberRepository = memberRepository; //직접 내가 new해서 생성하는게 아니라 외부에서 넣어주도록 바꿔준다.
     }
@@ -35,8 +40,8 @@ public class MemberService {
     }
 
     /**
-    * 전체 회원 조회
-    * */
+     * 전체 회원 조회
+     */
     public List<Member> findMembers() {
         //role에 맞도록 네이밍 하세요
         return memberRepository.findAll(); //findall 반환타입 list엿으니까 그냥 return 하면됨

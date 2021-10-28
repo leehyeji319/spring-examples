@@ -1,10 +1,12 @@
 package hello.hellospring.repository;
 
 import hello.hellospring.domain.Member;
+import org.springframework.stereotype.Repository;
 
 import javax.swing.text.html.Option;
 import java.util.*;
 
+@Repository //리포지토리네? 하고 암
 public class MemoryMemberRepository implements MemberRepository{
     //Save 를 할 때 map 을 쓸게요
     private static Map<Long, Member> store = new HashMap<>();
