@@ -36,16 +36,16 @@ class MemberServiceTest {
 
     @Test
     void 회원가입() { //test는 그냥 한글로도 많이 적음
-        //given
+        //given //이 데이터를 기반으로
         Member member = new Member();
         member.setName("spring");
 
-        //when
+        //when //이걸 검증하는구나
         Long saveId = memberService.join(member);
 
-        //then
-        Member findmember = memberService.findOne(saveId).get();
-        assertThat(member.getName()).isEqualTo(findmember.getName());
+        //then //여기서 검증
+        Member findMember = memberService.findOne(saveId).get();
+        assertThat(member.getName()).isEqualTo(findMember.getName());
         // 이거는 너무 단순해
 
     }
@@ -60,7 +60,7 @@ class MemberServiceTest {
         member2.setName("spring");
 
         //when
-        memberService.join(member1);
+        memberService.join(member1); //여기선 문제가 없겟지 두번째 조인검증할때 validate에 걸려서 예외가 터져야됨
         IllegalStateException e = assertThrows(IllegalStateException.class, () -> memberService.join(member2));//예네가 터져야됨 이 예외가!!
 
         assertThat(e.getMessage()).isEqualTo("이미 존재하는 회원입니다.");
@@ -68,7 +68,7 @@ class MemberServiceTest {
 /*        try {
             memberService.join(member2);
             //만약 위가 실행되고 익셉션 안터지고 내려가면 실패지?
-            fail();
+            fail(); //예외가 발생해야합니다.
 
         } catch (IllegalStateException e){
             assertThat(e.getMessage()).isEqualTo("이미 존재하는 회원입니다.");

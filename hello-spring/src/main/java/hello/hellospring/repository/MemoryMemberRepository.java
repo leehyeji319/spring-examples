@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import javax.swing.text.html.Option;
 import java.util.*;
 
-@Repository //리포지토리네? 하고 암
+//@Repository
 public class MemoryMemberRepository implements MemberRepository{
     //Save 를 할 때 map 을 쓸게요
     private static Map<Long, Member> store = new HashMap<>();
@@ -29,7 +29,7 @@ public class MemoryMemberRepository implements MemberRepository{
     @Override
     public Optional<Member> findByName(String name) {
         return store.values().stream()
-                .filter(member -> member.getName().equals(name))
+                .filter(member -> member.getName().equals(name))//람다
                 .findAny();
         //파라미터로 넘어온 네임과 여기 네임이 같은지 확인
         //같은 경우에만 필터가 된다 넘어감
@@ -38,9 +38,9 @@ public class MemoryMemberRepository implements MemberRepository{
     }
 
     @Override
-    public List<Member> findAll() {
+    public List<Member> findAll() { //실무에선 list 많이 씀
         //map 이지만 반환은 list
-        return new ArrayList<>(store.values());
+        return new ArrayList<>(store.values()); //store에 있는 member들이 쭉 반환이 된다.
     }
 
     public void clearStore() {

@@ -10,29 +10,31 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.*; //static이 되엇음
 
-class MemoryMemberRepositoryTest {
+class MemoryMemberRepositoryTest { //굳이 public 안해도 된다.
 
     MemoryMemberRepository repository = new MemoryMemberRepository();
 
-    //method가 끝날 때마다 repository 지워주는 callback method
+    //method가 끝날 때마다 repository를 깨끗하게 지워주는 callback method
     @AfterEach
     public void afterEach(){
         //끝날때마다 호출이 된다.
+        //save끝나고 afterEach, 모든 메서드 끝날때마다 ...
         repository.clearStore(); //지운다
     }
 
     @Test //Junit annotation에 test
     public void save(){
         Member member = new Member(); //저장한거랑
-        member.setName("spring");
+        member.setName("spring"); //이름 셋팅내가 해주고  cmd + shift + enter치면 바로 내려옴ㅋㅋ
 
         repository.save(member); //저장하고 나면 아이디 세팅되는거임
 
         Member result = repository.findById(member.getId()).get(); //optional에서 꺼낼땐 get 으로 빠로 꺼낼 수 있다. 디비에서 꺼낸거랑
         //System.out.println("result = " + (result == member)); //같은지 피교
         //하지만 내가 글자를 볼 수 없다면?
-        //Assertions.assertEquals(member, result;
+        //Assertions.assertEquals(member, result);
         assertThat(member).isEqualTo(result); //asssertThat에서 result랑 똑같아
+        //Assertions (org.assertj.core.api)  static import 하면 편함
     }
 
     @Test
@@ -45,7 +47,7 @@ class MemoryMemberRepositoryTest {
         member2.setName("spring2");
         repository.save(member2);
 
-        Member result = repository.findByName("spring1").get();
+        Member result = repository.findByName("spring1").get(); //get이라고 하면 optional을 한번 까서 가져올수잇음
 
         assertThat(result).isEqualTo(member1);
 
@@ -61,7 +63,7 @@ class MemoryMemberRepositoryTest {
         member1.setName("spring1");
         repository.save(member1);
 
-        Member member2 = new Member();
+        Member member2 = new Member(); //
         member2.setName("spring2");
         repository.save(member2);
 
