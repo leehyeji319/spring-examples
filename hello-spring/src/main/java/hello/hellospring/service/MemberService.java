@@ -5,11 +5,13 @@ import hello.hellospring.repository.MemberRepository;
 import hello.hellospring.repository.MemoryMemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
 //@Service //@Service를 붙이면 스프링이 스프링 컨테이너에 얘를 알아보고 딱 등록해
+@Transactional
 public class MemberService { //얘는 순수한 자바 코드
 
     private final MemberRepository memberRepository;
@@ -28,11 +30,12 @@ public class MemberService { //얘는 순수한 자바 코드
 
     public Long join(Member member) {
         //같은이름이 있는 중복회원이 있으면 안된다
-        // Optional<Member> result = memberRepository.findByName(member.getName());
-        //optional을 바로 직접 꺼내서 반환하는건 권장 no. 일단 안이쁨. 그래서 얘를 없애. 얘 반환이 옵셔널 //cmd opt v = 그냥 받아옴
         validateDuplicateMember(member); //중복회원 검증
         memberRepository.save(member);
         return member.getId();
+
+        // Optional<Member> result = memberRepository.findByName(member.getName());
+        //optional을 바로 직접 꺼내서 반환하는건 권장 no. 일단 안이쁨. 그래서 얘를 없애. 얘 반환이 옵셔널 //cmd opt v = 그냥 받아옴
     }
 
     private void validateDuplicateMember(Member member) { //ctrl + T 하면 리팩토링 관련 단축키 나옴
@@ -46,8 +49,8 @@ public class MemberService { //얘는 순수한 자바 코드
      * 전체 회원 조회
      */
     public List<Member> findMembers() {
-        //role에 맞도록 네이밍 하세요
         return memberRepository.findAll(); //findall 반환타입 list엿으니까 그냥 return 하면됨
+        //role에 맞도록 네이밍 하세요
     }
 
     public Optional<Member> findOne(Long memberId) {
