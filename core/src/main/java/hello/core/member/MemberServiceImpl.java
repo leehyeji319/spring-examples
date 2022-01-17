@@ -2,7 +2,12 @@ package hello.core.member;
 
 public class MemberServiceImpl implements MemberService {
 
-	private final MemberRepository memberRepository = new MemoryMemberRepository();//구현 객체 선택해주기
+	private final MemberRepository memberRepository; //인터페이스만 잇죠? 추상화에만 의존하고잇음 생성자를 통해서 객체가 들어간다 DI
+
+	public MemberServiceImpl(MemberRepository memberRepository) {
+		this.memberRepository = memberRepository;
+	}
+
 	@Override
 	public void join(Member member) {
 		memberRepository.save(member); //다형성으로 new 한게 호출이 되겟죠?

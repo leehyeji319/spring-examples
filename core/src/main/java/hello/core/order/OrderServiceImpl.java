@@ -2,14 +2,23 @@ package hello.core.order;
 
 import hello.core.discount.DiscountPolicy;
 import hello.core.discount.FixDiscountPolicy;
+import hello.core.discount.RateDiscountPolicy;
 import hello.core.member.Member;
 import hello.core.member.MemberRepository;
 import hello.core.member.MemoryMemberRepository;
 
 public class OrderServiceImpl implements OrderService{
 
-	private final MemberRepository memberRepository = new MemoryMemberRepository(); //new 해서 구현체를 생성해서 사용하고있다.
-	private final DiscountPolicy discountPolicy = new FixDiscountPolicy();
+	//final이 되어잇으면 기본이든 생성자를 통해서 할당이 되어야함
+	private final MemberRepository memberRepository;
+	//private final DiscountPolicy discountPolicy = new FixDiscountPolicy(); //고정을 정률로 바꿔주자
+	//private final DiscountPolicy discountPolicy = new RateDiscountPolicy();
+	private final DiscountPolicy discountPolicy; //이렇게 하면 인터페이스에만 의존하는거니까 DIP 해결 ? ㅋㅋ 근데 구현은 없잔아 ... ;;
+
+	public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+		this.memberRepository = memberRepository;
+		this.discountPolicy = discountPolicy;
+	}
 
 	@Override
 	public Order createOrder(Long memberId, String itemName, int itemPrice) {//단일 책임 원칙 짱 잘 설계
