@@ -1,9 +1,14 @@
 package hello.core.member;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+@Component
 public class MemberServiceImpl implements MemberService {
 
 	private final MemberRepository memberRepository; //인터페이스만 잇죠? 추상화에만 의존하고잇음 생성자를 통해서 객체가 들어간다 DI
 
+	@Autowired //ac.getBean(MemberRepository.class) 마치 이거처럼 들어간다.
 	public MemberServiceImpl(MemberRepository memberRepository) {
 		this.memberRepository = memberRepository;
 	}

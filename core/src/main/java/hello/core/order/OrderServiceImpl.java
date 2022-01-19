@@ -1,5 +1,8 @@
 package hello.core.order;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import hello.core.discount.DiscountPolicy;
 import hello.core.discount.FixDiscountPolicy;
 import hello.core.discount.RateDiscountPolicy;
@@ -7,9 +10,11 @@ import hello.core.member.Member;
 import hello.core.member.MemberRepository;
 import hello.core.member.MemoryMemberRepository;
 
+@Component
 public class OrderServiceImpl implements OrderService{
 
 	//final이 되어잇으면 기본이든 생성자를 통해서 할당이 되어야함
+	@Autowired //생성자 위에 오토와이어드
 	private final MemberRepository memberRepository;
 	//private final DiscountPolicy discountPolicy = new FixDiscountPolicy(); //고정을 정률로 바꿔주자
 	//private final DiscountPolicy discountPolicy = new RateDiscountPolicy();
