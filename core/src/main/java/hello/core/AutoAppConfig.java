@@ -18,9 +18,9 @@ import hello.core.member.MemoryMemberRepository;
 public class AutoAppConfig {
 
 
-	//Overriding bean definition for bean 'memoryMemberRepository' 발생
-	@Bean(name = "memoryMemberRepository")
-	MemberRepository memberRepository() {
-		return new MemoryMemberRepository();
-	}
+	// //Overriding bean definition for bean 'memoryMemberRepository' 발생
+	// @Bean(name = "memoryMemberRepository")
+	// MemberRepository memberRepository() {
+	// 	return new MemoryMemberRepository();
+	// }
 }
