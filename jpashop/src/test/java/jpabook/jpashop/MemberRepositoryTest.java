@@ -20,7 +20,7 @@ public class MemberRepositoryTest {
 	@Test
 	@Transactional //트랜잭션이잇어야 동작을 하죠 ~~ 꼭 있어야해
 	//Transactional	이 테스트에 있으면 디비를 롤백해줘.
-	//@Rollback(value = false)
+	@Rollback(value = false)
 	public void testMember() throws Exception {
 		//given
 		Member member = new Member();
