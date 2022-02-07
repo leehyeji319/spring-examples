@@ -1,10 +1,13 @@
 package jpabook.jpashop.domain;
 
+import static javax.persistence.FetchType.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -36,10 +39,16 @@ public class Category {
 		inverseJoinColumns = @JoinColumn(name = "item_id")) //중간테이블 매핑을 해줘야함. 일대다 다대일로 풀어내는 중간테이블이 있어야함
 	private List<Item> items = new ArrayList<>();
 
-	@ManyToOne
+	@ManyToOne(fetch = LAZY)
 	@JoinColumn(name = "parent_id")
 	private Category parent;
 
 	@OneToMany(mappedBy = "parent") //셀프의 연관관계를 건거라고 생각하면 된다.
 	private List<Category> child = new ArrayList<>();
+
+	//==연관관계 편이 메서드==// parent니까 셀프
+	public void addChildCategory(Category child) {
+		this.child.add(child);
+		child.setParent(this);
+	}
 }
