@@ -8,10 +8,16 @@ import lombok.Getter;
 @Getter
 public class Address {
 
-	protected Address() { //생성자는 protected로 선언 jpa 스펙상 만들어준것이다.
-	}
-
 	private String city;
 	private String street;
 	private String zipcode;
+
+	protected Address() { //생성자는 protected로 선언 jpa 스펙상 만들어준것이다.
+	}
+
+	public Address(String city, String street, String zipcode) {
+		this.city = city;
+		this.street = street;
+		this.zipcode = zipcode;
+	}
 }
