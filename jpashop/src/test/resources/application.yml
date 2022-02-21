@@ -1,0 +1,20 @@
+#테스트 안에 있는 yml이 우선권을 가진다
+#jvm 안에 h2를 띄울수가 있다. 메모리로 띄우면 된다. 별도 설정없으면 알아서 memorymode로 해줌
+#spring:
+#  datasource:
+#    url: jdbc:h2:mem:test #memory mode로 동작을 함
+#    username: sa
+#    password:
+#    driver-class-name: org.h2.Driver
+#
+#  jpa:
+#    hibernate:
+#      ddl-auto: create #자동으로 테이블 만들어주는거
+#    properties:
+#      hibernate:
+##        show_sql: true
+#        format_sql: true
+
+logging.level:
+  org.hibernate.SQL: debug
+  org.hibernate.type: trace
