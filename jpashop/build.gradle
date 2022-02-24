@@ -33,6 +33,10 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
+	//지연 로딩 때문에 추가
+	implementation 'com.fasterxml.jackson.datatype:jackson-datatype-hibernate5'
+
+
 	//JUnit4 추가
 	testImplementation("org.junit.vintage:junit-vintage-engine") {
 	exclude group: "org.hamcrest", module: "hamcrest-core"
