@@ -12,6 +12,8 @@ import jpabook.jpashop.domain.Order;
 import jpabook.jpashop.domain.OrderStatus;
 import jpabook.jpashop.repository.OrderRepository;
 import jpabook.jpashop.repository.OrderSearch;
+import jpabook.jpashop.repository.order.simplequery.OrderSimpleQueryDto;
+import jpabook.jpashop.repository.order.simplequery.OrderSimpleQueryReposiotry;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
@@ -26,6 +28,7 @@ import lombok.RequiredArgsConstructor;
 public class OrderSimpleApiController {
 
 	private final OrderRepository orderRepository;
+	private final OrderSimpleQueryReposiotry orderSimpleQueryReposiotry;
 
 	@GetMapping("/api/v1/simple-orders")
 	public List<Order> ordersV1() { //무한 루프에 감 member가니까 order있어.. order가니까 또 member있어ㅋㅋ
@@ -50,6 +53,21 @@ public class OrderSimpleApiController {
 			.collect(Collectors.toList());
 
 		return result;
+	}
+
+	@GetMapping("/api/v3/simple-orders")
+	public List<SimpleOrderDto> ordersV3() { //fetch join 값을 걍 다 넣어서 가져와라
+		List<Order> orders = orderRepository.findAllWithMemberDelivery();
+		List<SimpleOrderDto> result = orders.stream()
+			.map(o -> new SimpleOrderDto(o))
+			.collect(Collectors.toList());
+
+		return result;
+	}
+
+	@GetMapping("/api/v4/simple-orders")
+	public List<OrderSimpleQueryDto> ordersV4() {
+		return orderSimpleQueryReposiotry.findOrderDtos();
 	}
 
 	@Data

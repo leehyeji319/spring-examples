@@ -93,13 +93,42 @@ public class OrderRepository {
 
 		//회원 이름 검색
 		if (StringUtils.hasText(orderSearch.getMemberName())) {
-		          Predicate name =
-		                  cb.like(m.<String>get("name"), "%" + orderSearch.getMemberName() + "%");
-		          criteria.add(name);
-		 }
+			Predicate name =
+				cb.like(m.<String>get("name"), "%" + orderSearch.getMemberName() + "%");
+			criteria.add(name);
+		}
 
 		cq.where(cb.and(criteria.toArray(new Predicate[criteria.size()])));
 		TypedQuery<Order> query = em.createQuery(cq).setMaxResults(1000);
 		return query.getResultList();
+	}
+
+	public List<Order> findAllWithMemberDelivery() {
+		return em.createQuery(
+				"select o from Order o" +
+					" join fetch o.member m" +
+					" join fetch o.delivery d", Order.class)
+			.getResultList();
+	}
+
+	public List<Order> findAllWithItem() {
+		return em.createQuery(
+			"select distinct o from Order o" +
+				" join fetch o.member m" +
+				" join fetch o.delivery d" +
+				" join fetch o.orderItems oi" + //여기서부터 쿼리가 존나 뻥튀기 될거란 말야
+				" join fetch oi.item i", Order.class)
+			.getResultList();
+		//1대 다 패치 조인은 페이징 자체가 불가능하다.
+	}
+
+	public List<Order> findAllWithMemberDelivery(int offset, int limit) {
+		return em.createQuery(
+				"select o from Order o" +
+					" join fetch o.member m" +
+					" join fetch o.delivery d", Order.class)
+			.setFirstResult(offset)
+			.setMaxResults(limit)
+			.getResultList();
 	}
 }

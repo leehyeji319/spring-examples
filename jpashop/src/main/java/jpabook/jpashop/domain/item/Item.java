@@ -12,11 +12,14 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.ManyToMany;
 
+import org.hibernate.annotations.BatchSize;
+
 import jpabook.jpashop.domain.Category;
 import jpabook.jpashop.exception.NotEnoughStockException;
 import lombok.Getter;
 import lombok.Setter;
 
+//@BatchSize(size = 100)
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE) //singletable 전략을 선택할거예요 (그림보면됨)//부모한테 상속관계 전략을 잡아야함
 @DiscriminatorColumn(name = "dtype")

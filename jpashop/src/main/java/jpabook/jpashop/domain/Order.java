@@ -22,6 +22,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.BatchSize;
+
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -42,6 +44,7 @@ public class Order {
 	@JoinColumn(name = "member_id") //근데 양방향 관계니까 연관관계 주인을 정해줘야한다. 외래키 있는곳을 주인으로
 	private Member member;
 
+	//@BatchSize(size = 1000) //컬렉션은 이렇게 해주면 됨 아닌 경우(item)확인
 	@OneToMany(mappedBy = "order", cascade = ALL) //persist를 한번에 해준다
 	private List<OrderItem> orderItems = new ArrayList<>();
 
