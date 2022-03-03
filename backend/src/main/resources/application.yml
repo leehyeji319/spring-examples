@@ -1,0 +1,72 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /
+    encoding:
+      charset: utf-8
+      enabled: true
+
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://postgres-database.cj8kdizre01l.us-east-1.rds.amazonaws.com:5432/recorder_db
+    username: recorder
+    password: fpzhej1234!
+  output.ansi.enabled: always
+
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: create # create, update, none
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    #show-sql: true
+    format-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        default_schema: lhj_test
+        default_batch_fetch_size: 100
+    defer-datasource-initialization: true
+
+  security:
+    oauth2.client:
+      registration:
+        google:
+          clientId: '692015238080-bg3no0p8case2vvhd6n0d3iii4o6hhpq.apps.googleusercontent.com'
+          clientSecret: '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'
+          scope:
+            - email
+            - profile
+
+
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 2MB
+
+logging.level:
+  org.hibernate.SQL: debug
+  org.hibernate.type: trace
+
+
+
+# cors ??
+cors:
+  allowed-origins: 'http://localhost:3000'
+  allowed-methods: GET,POST,PUT,DELETE,OPTIONS
+  allowed-headers: '*'
+  max-age: 3600
+
+# jwt secret key ??
+jwt.secret: '8sknjlO3NPTBqo319DHLNqsQAfRJEdKsETOds'
+
+# ?? ?? secret Key ? RedirectUri ??
+app:
+  auth:
+    tokenSecret: 926D96C90030DD58429D2751AC1BDBBC
+    tokenExpiry: 1800000
+    refreshTokenExpiry: 604800000
+  oauth2:
+    authorizedRedirectUris:
+      - http://localhost:3000/oauth/redirect
