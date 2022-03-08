@@ -17,13 +17,14 @@ import javax.persistence.OneToMany;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import recorder.backend.domain.BaseEntity;
 import recorder.backend.domain.category.Category;
 import recorder.backend.domain.comment.Comment;
 import recorder.backend.domain.user.User;
 
 @Entity
-@Getter
+@Getter @Setter
 @NoArgsConstructor
 public class Post extends BaseEntity {
 

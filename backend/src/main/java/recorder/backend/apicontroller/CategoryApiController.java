@@ -37,7 +37,7 @@ public class CategoryApiController {
 		return categoryService.saveCategory(requestDto);
 	}
 
-	//조회
+	//카테고리 이름만 조회
 	@GetMapping("/board/categories")
 	public Result allCategories() {
 		List<CategoryNameDto> categoryNameDtos = categoryService.showCategoryNames();
@@ -52,12 +52,17 @@ public class CategoryApiController {
 		return new CategoryResponsetDto(findCategory);
 	}
 
+/*
+	@GetMapping)"/board/categories/v1/{category_id}"
+	public Result categoryV1() {
+		categoryRepository.findAll()
+	}
+*/
+
 	//수정
 	@PutMapping("/board/categories/{category_id}")
-	public CategoryUpdateResponseDto updateCategory(@PathVariable("category_id") Long categoryId, CategoryUpdateRequestDto updateDto) {
-		Long updateCategory = categoryService.updateCategory(categoryId, updateDto);
-		Category updateSaveCategory = categoryRepository.findById(updateCategory).get();
-		return new CategoryUpdateResponseDto(updateSaveCategory.getId(), updateSaveCategory.getName());
+	public CategoryUpdateResponseDto updateCategory(@PathVariable("category_id") Long categoryId, @RequestBody CategoryUpdateRequestDto updateDto) {
+		return categoryService.updateCategory(categoryId, updateDto);
 	}
 
 	//삭제

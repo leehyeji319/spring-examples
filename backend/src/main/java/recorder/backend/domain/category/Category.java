@@ -39,7 +39,7 @@ public class Category {
 	private String name;
 
 	@OneToMany(mappedBy = "category", cascade = ALL)
-	private List<Post> postList = new ArrayList<>();
+	private List<Post> posts = new ArrayList<>();
 
 
 	@Builder
