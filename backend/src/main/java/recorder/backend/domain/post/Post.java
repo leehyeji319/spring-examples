@@ -14,8 +14,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import recorder.backend.domain.BaseEntity;
 import recorder.backend.domain.category.Category;
 import recorder.backend.domain.comment.Comment;
 import recorder.backend.domain.user.User;
@@ -23,7 +25,7 @@ import recorder.backend.domain.user.User;
 @Entity
 @Getter
 @NoArgsConstructor
-public class Post {
+public class Post extends BaseEntity {
 
 	@Id @GeneratedValue
 	@Column(name = "post_id")
@@ -38,6 +40,8 @@ public class Post {
 	private String content;
 
 	private int hits = 0;
+
+	private String summary;
 
 	@Enumerated(EnumType.STRING)
 	private Exposure exposure;
@@ -57,5 +61,21 @@ public class Post {
 	@OneToMany(mappedBy = "post")
 	private List<PostTag> postTags = new ArrayList<>();
 
+	@Builder
+	public Post(User user, String title, String content, int hits, String summary,
+		Exposure exposure, String thumnail_image, Category category) {
+		this.user = user;
+		this.title = title;
+		this.content = content;
+		this.hits = hits;
+		this.summary = summary;
+		this.exposure = exposure;
+		this.thumnail_image = thumnail_image;
+		this.category = category;
+	}
 
+	//조회수
+	public void addHits() {
+		this.hits += 1;
+	}
 }

@@ -1,5 +1,7 @@
 package recorder.backend.domain.user;
 
+import static javax.persistence.CascadeType.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +21,7 @@ import lombok.Setter;
 import recorder.backend.domain.BaseEntity;
 import recorder.backend.domain.category.Category;
 import recorder.backend.domain.comment.Comment;
-import recorder.backend.domain.follow.Follow;
+//import recorder.backend.domain.follow.Follow;
 import recorder.backend.domain.post.PostLike;
 
 @Getter @Setter
@@ -49,36 +51,29 @@ public class User extends BaseEntity {
 	private Role role;
 
 
-	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "user", cascade = ALL)
 	private List<Category> categoryList = new ArrayList<>();
 
-	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "user", cascade = ALL)
 	private List<Comment> commentList = new ArrayList<>();
 
-	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-	private List<Follow> followList = new ArrayList<>();
+/*	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+	private List<Follow> followList = new ArrayList<>();*/
 
-	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "user", cascade = ALL)
 	private List<PostLike> postLikeList = new ArrayList<>();
 
 	@Builder
-	public User(String email, String name, String nickname, String picture, String domain,
-		String introduce, Role role) {
+	public User(String email, String name, String picture, Role role) {
 		this.email = email;
 		this.name = name;
-		this.nickname = nickname;
 		this.picture = picture;
-		this.domain = domain;
-		this.introduce = introduce;
 		this.role = role;
 	}
 
-	public User update(String name, String picture, String nickname, String domain, String introduce) {
+	public User update(String name, String picture) {
 		this.name = name;
 		this.picture = picture;
-		this.nickname = nickname;
-		this.domain = domain;
-		this.introduce = introduce;
 
 		return this;
 	}
