@@ -18,8 +18,8 @@ public class PostResponseDto {
 
 	public PostResponseDto(Post post) {
 		this.postId = post.getId();
-//		this.userId = post.getUser().getId();
-//		this.categoryId = post.getCategory().getId();
+		this.userId = post.getUser().getId();
+		this.categoryId = post.getCategory().getId();
 		this.title = post.getTitle();
 		this.content = post.getContent();
 		this.summary = post.getSummary();

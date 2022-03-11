@@ -9,3 +9,4 @@ import recorder.backend.domain.category.Category;
 public interface CategoryRepository extends JpaRepository<Category, Long> {
 	Optional<Category> findByName(String categoryName);
 }
+

@@ -9,4 +9,6 @@ import recorder.backend.domain.user.User;
 public interface UserRepository extends JpaRepository<User, Long> {
 
 	Optional<User> findByEmail(String email);
+
+	Optional<User> findByDomain(String domain);
 }

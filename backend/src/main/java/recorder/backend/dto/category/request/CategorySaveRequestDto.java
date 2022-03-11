@@ -14,7 +14,10 @@ import recorder.backend.domain.user.User;
 public class CategorySaveRequestDto {
 
 	private Long cateogryId;
+
 	private User user;
+	private Long userId;
+
 
 	@NotEmpty
 	@Length(max = 10)

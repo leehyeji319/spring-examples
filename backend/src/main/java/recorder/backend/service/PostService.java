@@ -7,12 +7,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
+import recorder.backend.domain.category.Category;
 import recorder.backend.domain.post.Post;
 import recorder.backend.domain.user.User;
 import recorder.backend.dto.post.request.PostSaveRequestDto;
 import recorder.backend.dto.post.request.PostUpdateRequestDto;
 import recorder.backend.dto.post.response.PostResponseDto;
 import recorder.backend.dto.post.response.PostUpdateResponseDto;
+import recorder.backend.repository.CategoryRepository;
 import recorder.backend.repository.PostRepository;
 import recorder.backend.repository.UserRepository;
 
@@ -22,13 +24,16 @@ import recorder.backend.repository.UserRepository;
 public class PostService {
 
 	private final PostRepository postRepository;
+	private final CategoryRepository categoryRepository;
 	private final UserRepository userRepository;
 
 	//생성
 	@Transactional
 	public Long savePost(PostSaveRequestDto requestDto) {
-		/*User user = userRepository.findById(requestDto.getUser().getId()).get();
-		requestDto.setUser(user);*/
+		User user = userRepository.findById(requestDto.getUser().getId()).get();
+		Category category = categoryRepository.findById(requestDto.getCategory().getId()).get();
+		requestDto.setUser(user);
+		requestDto.setCategory(category);
 
 		return postRepository.save(requestDto.toEntity()).getId();
 	}

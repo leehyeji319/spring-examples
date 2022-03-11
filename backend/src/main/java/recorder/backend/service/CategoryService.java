@@ -28,8 +28,9 @@ public class CategoryService {
 	//카테고리 생성
 	@Transactional
 	public Long saveCategory(CategorySaveRequestDto requestDto) {
-		/*User user = userRepository.findById(requestDto.getUser().getId()).get();
-		requestDto.setUser(user);*/
+		User user = userRepository.findById(requestDto.getUser().getId()).get();
+		requestDto.setUser(user);
+
 		validateDuplicatedCategoryName(requestDto.getCategoryName());
 		return categoryRepository.save(requestDto.toEntity()).getId();
 	}

@@ -14,9 +14,14 @@ import recorder.backend.domain.user.User;
 @Data
 public class PostSaveRequestDto {
 
+
 	private Long postId;
 	private Category category;
 	private User user;
+
+	private Long userId;
+	private Long categoryId; //여기 구현 제대로 하기
+
 	@NotEmpty
 	@Size(min = 1, max = 20)
 	private String title;
@@ -41,5 +46,9 @@ public class PostSaveRequestDto {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
 	}
 }
