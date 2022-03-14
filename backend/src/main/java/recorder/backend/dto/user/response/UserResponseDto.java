@@ -13,7 +13,6 @@ public class UserResponseDto {
 
 	private Long userId;
 	private String email;
-	private String name;
 	private String nickname;
 	private String picture;
 	private String domain;
@@ -23,7 +22,6 @@ public class UserResponseDto {
 	public UserResponseDto(User user) {
 		this.userId = user.getId();
 		this.email = user.getEmail();
-		this.name = user.getName();
 		this.nickname = user.getNickname();
 		this.picture = user.getPicture();
 		this.domain = user.getDomain();

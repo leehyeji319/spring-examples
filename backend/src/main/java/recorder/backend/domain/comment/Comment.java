@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import recorder.backend.domain.post.Post;
@@ -33,4 +34,19 @@ public class Comment {
 	@ManyToOne(fetch = LAZY)
 	@JoinColumn(name = "post_id")
 	private Post post;
+
+	@Builder
+	public Comment(String content, User user, Post post) {
+		this.content = content;
+		this.user = user;
+		this.post = post;
+	}
+
+	public String getProfilePhoto() {
+		return user.getPicture();
+	}
+
+	public String getAuthorName() {
+		return user.getNickname();
+	}
 }

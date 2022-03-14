@@ -7,7 +7,6 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 import lombok.Data;
-import recorder.backend.domain.user.Role;
 import recorder.backend.domain.user.User;
 
 
@@ -17,8 +16,9 @@ public class UserSaveRequestDto {
 	private Long userId;
 	@NotEmpty
 	private String email;
+
 	@NotEmpty
-	private String name;
+	private String password;
 	@NotEmpty
 	private String nickname;
 	private String picture;
@@ -30,7 +30,7 @@ public class UserSaveRequestDto {
 	public User toEntity() {
 		return User.builder()
 			.email(this.email)
-			.name(this.name)
+			.password(this.password)
 			.nickname(this.nickname)
 			.picture(this.picture)
 			.domain(this.domain)

@@ -37,7 +37,7 @@ public class User extends BaseEntity {
 	@Column(unique = true)
 	private String email;
 
-	private String name;
+	private String password;
 
 	private String nickname;
 
@@ -78,10 +78,10 @@ public class User extends BaseEntity {
 */
 
 	@Builder
-	public User(String email, String name, String nickname, String picture, String domain,
+	public User(String email, String password, String nickname, String picture, String domain,
 		String introduce, Role role) {
 		this.email = email;
-		this.name = name;
+		this.password = password;
 		this.nickname = nickname;
 		this.picture = picture;
 		this.domain = domain;
