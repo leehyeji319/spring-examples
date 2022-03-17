@@ -22,6 +22,6 @@ public class CategoryPostsDto {
 		hits = post.getHits();
 		summary = post.getSummary();
 		exposure = String.valueOf(post.getExposure());
-		thumnailImage = post.getThumnail_image();
+		thumnailImage = post.getThumbnail_image();
 	}
 }

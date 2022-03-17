@@ -45,10 +45,10 @@ public class PostService {
 		findPost.setTitle(updateDto.getTitle());
 		findPost.setContent(updateDto.getTitle());
 		findPost.setExposure(updateDto.getExposure());
-		findPost.setThumnail_image(updateDto.getThumnailImage());
+		findPost.setThumbnail_image(updateDto.getThumnailImage());
 		findPost.setCategory(updateDto.getCategory());
 		return new PostUpdateResponseDto(findPost.getId(),findPost.getCategory().getId(), findPost.getTitle(),
-			findPost.getContent(), findPost.getSummary(), findPost.getThumnail_image());
+			findPost.getContent(), findPost.getSummary(), findPost.getThumbnail_image());
 	}
 
 	//조회

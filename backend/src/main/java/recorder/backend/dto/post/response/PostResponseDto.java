@@ -25,6 +25,6 @@ public class PostResponseDto {
 		this.summary = post.getSummary();
 		this.hits = post.getHits();
 		this.exposure = post.getExposure();
-		this.thumnailImage = post.getThumnail_image();
+		this.thumnailImage = post.getThumbnail_image();
 	}
 }

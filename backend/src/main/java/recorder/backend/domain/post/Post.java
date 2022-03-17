@@ -47,7 +47,7 @@ public class Post extends BaseEntity {
 	@Enumerated(EnumType.STRING)
 	private Exposure exposure;
 
-	private String thumnail_image;
+	private String thumbnail_image;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "category_id")
@@ -64,14 +64,14 @@ public class Post extends BaseEntity {
 
 	@Builder
 	public Post(User user, String title, String content, int hits, String summary,
-		Exposure exposure, String thumnail_image, Category category) {
+		Exposure exposure, String thumbnail_image, Category category) {
 		this.user = user;
 		this.title = title;
 		this.content = content;
 		this.hits = hits;
 		this.summary = summary;
 		this.exposure = exposure;
-		this.thumnail_image = thumnail_image;
+		this.thumbnail_image = thumbnail_image;
 		this.category = category;
 	}
 

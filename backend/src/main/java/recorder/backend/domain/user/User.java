@@ -5,11 +5,8 @@ import static javax.persistence.CascadeType.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -47,9 +44,11 @@ public class User extends BaseEntity {
 
 	private String introduce;
 
+/*
 	@Enumerated(EnumType.STRING)
 	@Column
 	private Role role;
+*/
 
 
 	@OneToMany(mappedBy = "user", cascade = ALL)
@@ -67,40 +66,20 @@ public class User extends BaseEntity {
 	@OneToMany(mappedBy = "user", cascade = ALL)
 	private List<Followers> followersList = new ArrayList<>();
 
-/*
-	@Builder
-	public User(String email, String name, String picture, Role role) {
-		this.email = email;
-		this.name = name;
-		this.picture = picture;
-		this.role = role;
-	}
-*/
 
 	@Builder
 	public User(String email, String password, String nickname, String picture, String domain,
-		String introduce, Role role) {
+		String introduce) {
 		this.email = email;
 		this.password = password;
 		this.nickname = nickname;
 		this.picture = picture;
 		this.domain = domain;
 		this.introduce = introduce;
-		this.role = role;
 	}
 
-/*	public User update(String name, String picture, String nickname, String domain, String introduce, Role role) {
-		this.name = name;
-		this.picture = picture;
-		this.nickname = nickname;
-		this.domain = domain;
-		this.introduce = introduce;
-		this.role = role;
-
-		return this;
-	}*/
-
-	public String getRoleKey() {
+/*	public String getRoleKey() {
 		return this.role.getKey();
 	}
+*/
 }

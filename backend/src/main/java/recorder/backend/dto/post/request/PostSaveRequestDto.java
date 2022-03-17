@@ -30,7 +30,7 @@ public class PostSaveRequestDto {
 	private String content;
 	private String summary;
 	private String exposure;
-	private String thumnail_image;
+	private String thumbnail_image;
 
 	public Post toEntity() {
 		return Post.builder()
@@ -40,7 +40,7 @@ public class PostSaveRequestDto {
 			.content(this.content)
 			.summary(this.summary)
 			.exposure(Exposure.valueOf(this.exposure))
-			.thumnail_image(this.thumnail_image)
+			.thumbnail_image(this.thumbnail_image)
 			.build();
 	}
 

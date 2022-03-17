@@ -17,7 +17,6 @@ public class UserResponseDto {
 	private String picture;
 	private String domain;
 	private String introduce;
-	private Role role;
 
 	public UserResponseDto(User user) {
 		this.userId = user.getId();
@@ -26,6 +25,5 @@ public class UserResponseDto {
 		this.picture = user.getPicture();
 		this.domain = user.getDomain();
 		this.introduce = user.getIntroduce();
-		this.role = user.getRole();
 	}
 }

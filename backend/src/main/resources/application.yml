@@ -5,13 +5,12 @@ server:
     encoding:
       charset: utf-8
       enabled: true
+    session:
+      timeout: 30m
 
 spring:
-  datasource:
-    driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://postgres-database.cj8kdizre01l.us-east-1.rds.amazonaws.com:5432/recorder_db
-    username: recorder
-    password: fpzhej1234!
+  profiles:
+    include: aws
   output.ansi.enabled: always
 
   jpa:
