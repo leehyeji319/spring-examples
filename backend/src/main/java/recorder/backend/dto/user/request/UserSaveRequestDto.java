@@ -23,6 +23,7 @@ public class UserSaveRequestDto {
 	private String nickname;
 	private String picture;
 	@NotEmpty
+
 	private String domain;
 	@Size(max = 20)
 	private String introduce;

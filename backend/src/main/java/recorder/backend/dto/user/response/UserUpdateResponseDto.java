@@ -8,7 +8,6 @@ import lombok.Data;
 public class UserUpdateResponseDto {
 
 	private Long userId;
-	private String name;
 	private String nickname;
 	private String picture;
 	private String domain;

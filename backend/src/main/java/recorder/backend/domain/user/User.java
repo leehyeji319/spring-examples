@@ -3,17 +3,23 @@ package recorder.backend.domain.user;
 import static javax.persistence.CascadeType.*;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import recorder.backend.domain.BaseEntity;
 import recorder.backend.domain.category.Category;
@@ -24,7 +30,7 @@ import recorder.backend.domain.post.PostLike;
 
 @Getter @Setter
 @Entity
-@NoArgsConstructor
+@Table(name = "user")
 public class User extends BaseEntity {
 
 	@Id @GeneratedValue
@@ -33,6 +39,8 @@ public class User extends BaseEntity {
 
 	@Column(unique = true)
 	private String email;
+
+	//private String username;
 
 	private String password;
 
@@ -44,11 +52,11 @@ public class User extends BaseEntity {
 
 	private String introduce;
 
-/*
-	@Enumerated(EnumType.STRING)
-	@Column
-	private Role role;
-*/
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "user_roles",
+		joinColumns = @JoinColumn(name = "user_id"),
+		inverseJoinColumns = @JoinColumn(name = "role_id"))
+	private Set<Role> roles = new HashSet<>();
 
 
 	@OneToMany(mappedBy = "user", cascade = ALL)
@@ -66,6 +74,9 @@ public class User extends BaseEntity {
 	@OneToMany(mappedBy = "user", cascade = ALL)
 	private List<Followers> followersList = new ArrayList<>();
 
+	public User() {
+
+	}
 
 	@Builder
 	public User(String email, String password, String nickname, String picture, String domain,
@@ -78,8 +89,14 @@ public class User extends BaseEntity {
 		this.introduce = introduce;
 	}
 
-/*	public String getRoleKey() {
-		return this.role.getKey();
+	@Builder
+	public User(String email, String password, String nickname, String domain,
+		String introduce) {
+		this.email = email;
+		this.password = password;
+		this.nickname = nickname;
+		this.domain = domain;
+		this.introduce = introduce;
 	}
-*/
+
 }

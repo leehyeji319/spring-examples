@@ -36,13 +36,12 @@ public class UserService {
 		validateDuplicateDomain(updateDto.getDomain());
 
 		User findUser = userRepository.findById(userId).get();
-		findUser.setName(updateDto.getName());
 		findUser.setNickname(updateDto.getNickname());
 		findUser.setPicture(updateDto.getPicture());
 		findUser.setDomain(updateDto.getDomain());
 		findUser.setIntroduce(updateDto.getIntroduce());
 
-		return new UserUpdateResponseDto(findUser.getId(), findUser.getName(), findUser.getNickname(),
+		return new UserUpdateResponseDto(findUser.getId(), findUser.getNickname(),
 			findUser.getPicture(), findUser.getDomain(), findUser.getIntroduce());
 	}
 

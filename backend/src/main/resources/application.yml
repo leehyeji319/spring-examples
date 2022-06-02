@@ -16,7 +16,7 @@ spring:
   jpa:
     open-in-view: false
     hibernate:
-      ddl-auto: create # create, update, none
+      ddl-auto: update # create, update, none
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
     #show-sql: true
@@ -27,6 +27,20 @@ spring:
         default_schema: lhj_testdb
         default_batch_fetch_size: 100
     defer-datasource-initialization: true
+
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+    time-zome: Asia/Seoul
+
+
+app:
+  jwtSecret: jwtsigntutorialasdfasdfasdfasdfasdf
+  jwtExpirationInMs: 604800000
+
+logging.level:
+  org.hibernate.SQL: debug
+  org.hibernate.type: trace
 
 #  security:
 #    oauth2.client:
@@ -45,9 +59,6 @@ spring:
 #      enabled: true
 #      max-file-size: 2MB
 
-logging.level:
-  org.hibernate.SQL: debug
-  org.hibernate.type: trace
 
 
 

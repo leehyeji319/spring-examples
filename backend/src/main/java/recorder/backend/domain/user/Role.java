@@ -1,15 +1,33 @@
 package recorder.backend.domain.user;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.NaturalId;
+
+import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Getter
-@RequiredArgsConstructor
-public enum Role {
+@Entity
+@Getter @Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Table(name = "roles")
+public class Role {
 
-	GUEST("ROLE_GUEST", "손님"),
-	USER("ROLE_USER", "일반 사용자");
+	@Id
+	@GeneratedValue
+	private Long id;
 
-	private final String key;
-	private final String title;
+	@Enumerated(EnumType.STRING)
+	@NaturalId
+	@Column(length = 60)
+	private RoleName name;
 }
