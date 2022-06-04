@@ -22,7 +22,7 @@ import lombok.Setter;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE) //singletable한테이블에 다 잡아주기
 @DiscriminatorColumn(name = "dtype")
 @Getter
-//@Setter //Setter보다는 그냥 이 안에서 비즈니스 로직을 짜고 그 메서드를 이용하여 객체에 접근하는게 젤 좋음
+@Setter //Setter보다는 그냥 이 안에서 비즈니스 로직을 짜고 그 메서드를 이용하여 객체에 접근하는게 젤 좋음
 public abstract class Item { //구현체로 선언
 
 	@Id
