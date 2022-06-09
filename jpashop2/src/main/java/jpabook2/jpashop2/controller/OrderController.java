@@ -5,11 +5,15 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import jpabook2.jpashop2.domain.Member;
+import jpabook2.jpashop2.domain.Order;
 import jpabook2.jpashop2.domain.item.Item;
+import jpabook2.jpashop2.repository.OrderSearch;
 import jpabook2.jpashop2.service.ItemService;
 import jpabook2.jpashop2.service.MemberService;
 import jpabook2.jpashop2.service.OrderService;
@@ -45,6 +49,20 @@ public class OrderController {
 		//커맨드성은 식별자만 넘기고 엔티티 찾고 이런거는 서비스단에서 하는게 좋다. Transactional 안에서 하는게 좋아요.
 		//가급적이면 컨트롤러에서 조회가 아닌 핵심비즈니스 로직을 트랜잭션안에서 하게끔. 영속성도거기에 있으니까
 		orderService.order(memberId, itemId, count);
+		return "redirect:/orders";
+	}
+
+	@GetMapping("/orders")
+	public String orderList(@ModelAttribute("orderSearch")OrderSearch orderSearch, Model model) {
+		List<Order> orders = orderService.findOrders(orderSearch);
+		model.addAttribute("orders", orders);
+
+		return "order/orderList";
+	}
+
+	@PostMapping("/orders/{orderId}/cancel")
+	public String cancelOrder(@PathVariable("orderId") Long orderId) {
+		orderService.cancelOrder(orderId);
 		return "redirect:/orders";
 	}
 }
