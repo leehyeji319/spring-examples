@@ -18,6 +18,5 @@ public class Posts {
 	private Long id;
 
 	@Column(length = 500, nullable = false)
-	private String title;
-	
+	private String title;	
 }
