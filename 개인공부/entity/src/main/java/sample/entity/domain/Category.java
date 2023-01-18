@@ -45,7 +45,7 @@ public class Category {
 	@OneToMany(mappedBy = "parent") //셀프의 연관관계를 건거라고 생각하면 된다.
 	private List<Category> child = new ArrayList<>();
 
-	//==연관관계 편이 메서드==// parent니까 셀프
+	//==연관관계 편의 메서드==// parent니까 셀프
 	public void addChildCategory(Category child) {
 		this.child.add(child);
 		child.setParent(this);
