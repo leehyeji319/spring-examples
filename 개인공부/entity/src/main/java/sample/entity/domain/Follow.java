@@ -23,12 +23,10 @@ public class Follow {
 	private Long followId;
 
 	@ManyToOne
-	// @Column(name = "follow_to_id")
 	@JoinColumn(name = "follow_to_id")
 	private User followTo;
 
 	@ManyToOne
-	// @Column(name = "follow_from_id")
 	@JoinColumn(name = "follow_from_id")
 	private User followFrom;
 

@@ -2,6 +2,7 @@ package sample.entity.domain;
 
 import static jakarta.persistence.FetchType.*;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -20,7 +21,8 @@ public class CardBundle {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	@Column(name = "card_bundle_id")
+	private Long cardBundleId;
 
 	@ManyToOne(fetch = LAZY)
 	@JoinColumn(name = "bundle_id")

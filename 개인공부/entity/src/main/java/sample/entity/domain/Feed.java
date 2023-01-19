@@ -6,6 +6,7 @@ import static jakarta.persistence.FetchType.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -14,7 +15,6 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
@@ -67,7 +67,11 @@ public class Feed {
 	@OneToMany(mappedBy = "feed", cascade = ALL)
 	private List<Comment> commentList = new ArrayList<>();
 
-	@ManyToMany(mappedBy = "feeds")
-	private List<Category> categoryList = new ArrayList<>();
+	//다대다로하면 일케
+	// @ManyToMany(mappedBy = "feeds")
+	// private List<Category> categoryList = new ArrayList<>();
+
+	@OneToMany(mappedBy = "feed", cascade = CascadeType.ALL)
+	private List<FeedCategory> feedCategoryList = new ArrayList<>();
 
 }

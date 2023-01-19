@@ -19,7 +19,7 @@ public class UserCardHit {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "user_card_id")
-	private Long userCardId;
+	private Long userCardHitId;
 
 	@Column(name = "user_submit")
 	private String userSubmit;

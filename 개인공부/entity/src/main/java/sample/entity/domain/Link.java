@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -31,5 +32,6 @@ public class Link {
 	private String linkDescription;
 
 	@OneToOne(mappedBy = "link", fetch = FetchType.LAZY)
+	@JoinColumn(referencedColumnName = "card_id")
 	private Card card;
 }

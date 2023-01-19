@@ -5,14 +5,13 @@ import static jakarta.persistence.FetchType.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import lombok.Getter;
@@ -28,15 +27,20 @@ public class Category {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "category_id")
-	private Long id;
+	private Long categoryId;
 
+	@Column(name = "category_name")
 	private String name;
 
-	@ManyToMany //다대다관계도 연관관계 주입해야함
-	@JoinTable(name = "category_feed",
-		joinColumns = @JoinColumn(name = "category_id"),
-		inverseJoinColumns = @JoinColumn(name = "feed_id")) //중간테이블 매핑을 해줘야함. 일대다 다대일로 풀어내는 중간테이블이 있어야함
-	private List<Feed> feeds = new ArrayList<>();
+	//다대다로 FeedCategory한다면
+	// @ManyToMany //다대다관계도 연관관계 주입해야함
+	// @JoinTable(name = "category_feed",
+	// 	joinColumns = @JoinColumn(name = "category_id"),
+	// 	inverseJoinColumns = @JoinColumn(name = "feed_id")) //중간테이블 매핑을 해줘야함. 일대다 다대일로 풀어내는 중간테이블이 있어야함
+	// private List<Feed> feedList = new ArrayList<>();
+
+	@OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
+	private List<FeedCategory> feedCategoryList = new ArrayList<>();
 
 	@ManyToOne(fetch = LAZY)
 	@JoinColumn(name = "parent_id")

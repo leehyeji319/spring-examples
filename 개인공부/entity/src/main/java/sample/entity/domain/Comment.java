@@ -24,7 +24,7 @@ public class Comment {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id")
-	private User user;
+	private User writer;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "feed_id")

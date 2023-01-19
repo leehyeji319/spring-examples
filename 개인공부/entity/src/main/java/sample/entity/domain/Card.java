@@ -29,10 +29,13 @@ public class Card {
 	@Column(name = "card_id")
 	private Long cardId;
 
+	@Column(name = "card_scrapCnt")
 	private int scrapCnt;
 
+	@Column(name = "card_description")
 	private String description;
 
+	@Column(name = "card_commentary")
 	private String commentary;
 
 	@Enumerated(EnumType.STRING)
@@ -47,4 +50,7 @@ public class Card {
 
 	@OneToOne(mappedBy = "card", fetch = FetchType.LAZY)
 	private Feed feed;
+
+	@OneToMany(mappedBy = "card", cascade = ALL)
+	private List<UserCardHit> userCardHitList = new ArrayList<>();
 }

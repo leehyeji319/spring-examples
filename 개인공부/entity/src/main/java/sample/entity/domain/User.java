@@ -34,6 +34,7 @@ public class User {
 
 	@Column(name = "user_profile_image")
 	private String userProfileImage;
+
 	@Column(name = "user_introduction")
 	private String userIntroduction;
 
@@ -43,9 +44,18 @@ public class User {
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 	private List<FeedLike> feedLikeList = new ArrayList<>();
 
-	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "writer", cascade = CascadeType.ALL)
 	private List<Comment> commentList = new ArrayList<>();
 
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 	private List<Feed> feedList = new ArrayList<>();
+
+	@OneToMany(mappedBy = "followTo", cascade = CascadeType.ALL)
+	private List<Follow> followToList = new ArrayList<>();
+
+	@OneToMany(mappedBy = "followFrom", cascade = CascadeType.ALL)
+	private List<Follow> followFromList = new ArrayList<>();
+
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+	private List<UserCardHit> userCardHitList = new ArrayList<>();
 }
