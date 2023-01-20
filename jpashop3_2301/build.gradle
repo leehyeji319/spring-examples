@@ -29,8 +29,10 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
     //query parameter 남기기
-    implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.5.6'
-
+//    implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.5.6'
+    // https://mvnrepository.com/artifact/p6spy/p6spy
+//    implementation group: 'p6spy', name: 'p6spy', version: '3.9.1'
+    implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.8.0'
 
     //JUnit4 추가
     testImplementation("org.junit.vintage:junit-vintage-engine") {

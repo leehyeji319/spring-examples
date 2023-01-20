@@ -1,5 +1,7 @@
 package jpabook3.jpashop3.domain;
 
+import static jakarta.persistence.FetchType.*;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -20,13 +22,13 @@ public class OrderItem {
 	@Column(name = "order_item_id")
 	private Long id;
 
-	@ManyToOne
+	@ManyToOne(fetch = LAZY)
 	@JoinColumn(name = "item_id")
 	private Item item;
 
 	//1대 다에서는 다에 포링키가들어오지
 	// order가 연관관계의 주인이 되고
-	@ManyToOne
+	@ManyToOne(fetch = LAZY)
 	@JoinColumn(name = "order_id")
 	private Order order;
 

@@ -1,5 +1,7 @@
 package jpabook3.jpashop3.domain;
 
+import static jakarta.persistence.FetchType.*;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
@@ -21,7 +23,7 @@ public class Delivery {
 	@Column(name = "delivery_id")
 	private Long id;
 
-	@OneToOne
+	@OneToOne(fetch = LAZY)
 	private Order order;
 
 	@Embedded

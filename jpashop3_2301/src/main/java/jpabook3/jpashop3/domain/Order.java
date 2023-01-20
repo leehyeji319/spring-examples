@@ -1,5 +1,7 @@
 package jpabook3.jpashop3.domain;
 
+import static jakarta.persistence.FetchType.*;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +32,7 @@ public class Order {
 	private Long id;
 
 	//관계설정
-	@ManyToOne
+	@ManyToOne(fetch = LAZY)
 	//mapping을 뭘로 할꺼냐. 양방향이면 연관관계의 주인을 정해줘야함
 	@JoinColumn(name = "member_id")
 	private Member member;
@@ -38,7 +40,7 @@ public class Order {
 	@OneToMany(mappedBy = "order")
 	private List<OrderItem> orderItems = new ArrayList<>();
 
-	@OneToOne //1대1은 포링키를 어디에 두냐에 장단점이있음. 액세스 많이 하는곳에 넣는게 좋음
+	@OneToOne(fetch = LAZY) //1대1은 포링키를 어디에 두냐에 장단점이있음. 액세스 많이 하는곳에 넣는게 좋음
 	@JoinColumn(name = "delivery_id")
 	private Delivery delivery;
 
